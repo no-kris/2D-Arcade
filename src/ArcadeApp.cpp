@@ -36,30 +36,3 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-
-//Vec2D myVec(5, 4);
-//Vec2D myOtherVec(4, 5);
-//
-//std::cout << myVec;
-//
-//Vec2D r = myVec + myOtherVec;
-//
-//std::cout << r;
-//
-//std::cout << myVec - myOtherVec;
-//
-//std::cout << "Magnitude: " << myVec.magnitude() << '\n';
-//
-//std::cout << "Normalize: " << myVec.normalize() << '\n';
-//
-//std::cout << "Distance: " << myVec.distance(myOtherVec) << '\n';
-//
-//std::cout << "Dot: " << myVec.dot(myOtherVec) << '\n';
-//
-//std::cout << "Projection: " << myVec.projectTo(myOtherVec) << '\n';
-//
-//std::cout << "Angle: " << myVec.angle(myOtherVec) << '\n';
-//
-//std::cout << "Reflection: " << myVec.reflect(myVec) << '\n';
-//
-//std::cout << "Rotation: " << myVec.rotate(30) << '\n';
