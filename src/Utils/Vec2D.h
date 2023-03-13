@@ -12,27 +12,15 @@ public:
 
 	// Setters
 
-	inline void setX(double x)
-	{
-		m_X = x;
-	}
+	inline void setX(double x) { m_X = x; }
 
-	inline void setY(double y)
-	{
-		m_Y = y;
-	}
+	inline void setY(double y) { m_Y = y; }
 
 	// Getters
 
-	inline double getX() const
-	{
-		return m_X;
-	}
+	inline double getX() const { return m_X; }
 
-	inline double getY() const
-	{
-		return m_Y;
-	}
+	inline double getY() const { return m_Y; }
 
 	// operator overloading
 
