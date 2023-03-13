@@ -70,7 +70,7 @@ Vec2D operator*(double scalar, const Vec2D &vec) // Non-member of vec class
 
 Vec2D Vec2D::operator/(double scalar) const
 {
-	if (scalar == 0) // Scalar can not be 0
+	if (scalar < Math::EPSILON) // Scalar can not be 0
 		throw std::runtime_error("ERROR: Division by zero\n");
 
 	return Vec2D(m_X / scalar, m_Y / scalar);
@@ -112,7 +112,7 @@ Vec2D& Vec2D::operator*=(double scalar)
 
 Vec2D& Vec2D::operator/=(double scalar)
 {
-	if (scalar == 0) // Scalar can not be 0
+	if (scalar < Math::EPSILON) // Scalar can not be 0
 		throw std::runtime_error("ERROR: Division by zero\n");
 	*this /= scalar; // uses the operator/ overload
 	return *this;
