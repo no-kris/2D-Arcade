@@ -159,7 +159,7 @@ double Vec2D::magnitude() const
 Vec2D Vec2D::normalize() const
 {
 	double mag = magnitude();
-	if (mag > 1)
+	if (mag > 1 && mag > Math::EPSILON)
 	{
 		return Vec2D(m_X / mag, m_Y / mag);
 	}
