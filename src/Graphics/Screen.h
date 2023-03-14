@@ -29,7 +29,7 @@ public:
 	// Drawing to the screen
 	void draw(int x, int y, const Color& color);
 	void draw(const Vec2D& point, const Color& color);
-	void draw(const Line& line, const Color& color);
+	void drawBresenhams(const Line& line, const Color& color);
 
 private:
 	void clearScreen();
