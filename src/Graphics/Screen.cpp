@@ -103,21 +103,22 @@ void Screen::draw(const Vec2D &point, const Color &color)
  * Idea:
  * When a line is between two pixels
  * find the distances between the line and the two pixels
- * use the pixel with the shortest distance
+ * use the pixel with the shortest distance to the line
  *
  * steps:
  * Starting from x0, increment by x + 1 until x1
  * decide whether to increment y or not based on distance
- * an error term will determine whether to round up or down the next pixel
+ * if distance >= 0, increment y
+ * else leave y as is
  */
 
-void Screen::draw(const Line& line, const Color& color)
+void Screen::drawBresenhams(const Line& line, const Color& color)
 {
 	// Make sure the window exists
 	assert(m_ptrWindow);
 	if (m_ptrWindow)
 	{
-		// Get the starting and ending points for the line
+		// Get the starting and ending points for the line, round to whole int
 		int x0 = std::round(line.getP0().getX());
 		int y0 = std::round(line.getP0().getY());
 		int x1 = std::round(line.getP1().getX());
@@ -127,52 +128,53 @@ void Screen::draw(const Line& line, const Color& color)
 		int dx = x1 - x0;
 		int dy = y1 - y0;
 
-		// determine whether to increment x and y by 1 or -1, get the sign
-		signed const short incX = (dx > 0) - (dx < 0);
-		signed const short incY = (dy > 0) - (dy < 0);
-
-		// get the absolute value of dx and dy
-		dx = std::abs(dx) * 2;
-		dy = std::abs(dy) * 2;
-
 		// draw the first pixel at whatever position has been passed
 		draw(x0, y0, color);
 
 		// to start drawing from the x axis
 		if(dx >= dy)
 		{
-			// get an error term
-			int error = dy - dx / 2;
+			// initial decision variable
+			int p = 2 * dy - dx;
 
 			// keep drawing until x0 is equal to x1
 			while(x0 != x1)
 			{
-				if (error >= 0)
+				// if decision >= 0, increment y
+				if (p >= 0)
 				{
-					error -= dx;
-					y0 += incY;
+					p = p + (2 * dy) - (2 * dx); // decision for next term
+					y0++;
+				}
+				// else leave y as is
+				else
+				{
+					p = p + 2 * dy; // decision for next term
 				}
 
-				error += dy;
-				x0 += incX;
+				x0++;
 
 				draw(x0, y0, color);
 			}
 		}
+		// To start drawing from the y axis
 		else
 		{
-			int error = dx - dy / 2;
+			int p = 2 * dy - dx;
 
 			while(y0 != y1)
 			{
-				if (error >= 0)
+				if (p >= 0)
 				{
-					error -= dy;
-					x0 += incX;
+					p = p + (2 * dx) - (2 * dy);
+					x0++;
+				}
+				else
+				{
+					p = p + 2 * dx;
 				}
 
-				error += dx;
-				y0 += incY;
+				y0++;
 
 				draw(x0, y0, color);
 			}
